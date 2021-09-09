@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status, mixins, viewsets
 
 from backend_property.users.api.serializer.user import MyTokenObtainPairSerializer, LogoutSerializer, SignUpSerializer, UserModelSerializer
+from backend_property.users.models import User
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -45,3 +46,13 @@ class UserSignupView(mixins.CreateModelMixin,
             return Response(data, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserView(mixins.ListModelMixin,
+                     viewsets.GenericViewSet):
+
+    serializer_class = UserModelSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'unique_code'
+    queryset = User.objects.filter(is_active=True)
+

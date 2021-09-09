@@ -14,7 +14,7 @@ class User(AbstractUser):
     """
     Class User extend  Abstract User
     """
-    typeUser = models.ForeignKey(TypeUser, on_delete=models.CASCADE)
+    typeUser = models.ForeignKey(TypeUser, on_delete=models.CASCADE, null=True)
     unique_code = models.UUIDField('Code Unique Generate', default=uuid.uuid4, editable=False)
     email = models.EmailField('email address', unique=True)
     first_name = models.CharField('First Name', max_length=255, blank=False, null=False)

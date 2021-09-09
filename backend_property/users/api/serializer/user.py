@@ -65,6 +65,12 @@ class SignUpSerializer(serializers.Serializer):
     phone_number = serializers.CharField(validators=[phone_regex],
                                          max_length=17)
 
+    username = serializers.CharField(
+        min_length=4,
+        max_length=20,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+
     # Password
     password = serializers.CharField(min_length=8, max_length=64)
     password_confirmation = serializers.CharField(min_length=8, max_length=64)
@@ -87,15 +93,27 @@ class SignUpSerializer(serializers.Serializer):
 
 
 class UserModelSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = User
         fields = '__all__'
 
     def to_representation(self, instance):
-        super().to_representation(instance)
-        return {
-            'unique_code': instance.unique_code,
-            'email': instance.email,
-            'phone_number': instance.phone_number,
-            'username': instance.phone_number
-        }
+        print(instance.typeUser)
+        if instance.typeUser is None:
+            return {
+                'unique_code': instance.unique_code,
+                'identify': instance.identify,
+                'email': instance.email,
+                'phone_number': instance.phone_number,
+                'full_name': "{} {}".format(instance.first_name, instance.last_name)
+            }
+        else:
+            return {
+                'unique_code': instance.unique_code,
+                'identify': instance.identify,
+                'email': instance.email,
+                'typeUser': instance.typeUser.name,
+                'phone_number': instance.phone_number,
+                'full_name': "{} {}".format(instance.first_name, instance.last_name)
+            }
