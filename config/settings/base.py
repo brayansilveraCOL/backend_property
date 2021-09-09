@@ -36,7 +36,8 @@ BASE_APPS = [
     'django.contrib.staticfiles',
 ]
 LOCAL_APPS = [
-    'backend_property.users'
+    'backend_property.users',
+    'backend_property.properties'
 ]
 
 THIRD_APPS = [
