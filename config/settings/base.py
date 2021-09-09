@@ -23,9 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v^&v*m9mwv775kld0ufwisms^e6)!c3^exz8bdzg(on#sg(t5d'
 
 
-# Application definition
+# Authentication Class
+AUTH_USER_MODEL = 'users.User'
 
-INSTALLED_APPS = [
+# Application definition
+BASE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -33,6 +35,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+LOCAL_APPS = [
+    'backend_property.users'
+]
+
+THIRD_APPS = [
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+
+]
+INSTALLED_APPS = LOCAL_APPS + THIRD_APPS + BASE_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
