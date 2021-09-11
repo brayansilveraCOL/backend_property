@@ -1,4 +1,6 @@
 # backend_property
+permita registrar y administrar propietarios de predios y sus predios
+
 # Inicio si ejecuta en Developer
 * python manage.py makemigrations
 * python manage.py migrate
