@@ -1,6 +1,9 @@
 # backend_property
 permita registrar y administrar propietarios de predios y sus predios
 
+
+# Postman Repository
+https://documenter.getpostman.com/view/10748947/U16kr5S3
 # Inicio si ejecuta en Developer
 * python manage.py makemigrations
 * python manage.py migrate
