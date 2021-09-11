@@ -78,7 +78,7 @@ class PropertyViewSet(mixins.ListModelMixin,
                     return Response({'data': request.data, 'message': 'Please send address'},
                                     status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response()
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, unique_code=None, *args, **kwargs):
         data = request.data

@@ -1,1 +1,2 @@
-from .property import Property
+from .property import *
+from .typeProperty import *
