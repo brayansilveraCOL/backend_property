@@ -9,6 +9,7 @@ router.register(r'typeProperty', TypePropertyViewSet, basename='type-property')
 router.register(r'property', PropertyViewSet, basename='property')
 
 
+
 urlpatterns = [
     path('', include(router.urls))
 ]

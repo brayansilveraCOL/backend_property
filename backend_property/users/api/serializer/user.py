@@ -98,8 +98,12 @@ class UserModelSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+    def update(self, instance, validated_data):
+        print(instance)
+        User.objects.filter(pk=instance.pk).update(**validated_data)
+        return instance
+
     def to_representation(self, instance):
-        print(instance.typeUser)
         if instance.typeUser is None:
             return {
                 'unique_code': instance.unique_code,
@@ -117,3 +121,4 @@ class UserModelSerializer(serializers.ModelSerializer):
                 'phone_number': instance.phone_number,
                 'full_name': "{} {}".format(instance.first_name, instance.last_name)
             }
+

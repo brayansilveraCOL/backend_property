@@ -7,7 +7,7 @@ from django.db import models
 # Local imports
 from backend_property.utils.classes.BaseAbstractModel import BaseModel
 from .typeProperty import TypeProperty
-from backend_property.users.models.user import User
+from ...users.models import User
 
 
 class Property(BaseModel):
@@ -17,4 +17,4 @@ class Property(BaseModel):
     address = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
     identify = models.CharField(max_length=250, unique=True)
-    users = models.ManyToManyField(User)
+    users = models.ManyToManyField(User, null=True)

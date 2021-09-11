@@ -1,14 +1,14 @@
 from backend_property.properties.models.property import Property
+from backend_property.properties.models.typeProperty import TypeProperty
 from rest_framework import serializers
 
 from backend_property.users.api.serializer.user import UserModelSerializer
-from backend_property.properties.api.serializers.typeProperty import TypePropertyModelSerializer
 
 
 class PropertyModelSerializer(serializers.ModelSerializer):
-    users = UserModelSerializer(read_only=True, many=True)
-    typeProperty = TypePropertyModelSerializer(read_only=True)
+    typeProperty = serializers.PrimaryKeyRelatedField(queryset=TypeProperty.objects.filter(is_active=True))
+    users = UserModelSerializer(many=True)
 
     class Meta:
         model = Property
-        fields = ['unique_code', 'identify', 'typeProperty', 'identifyCatrastal', 'address', 'name', 'users']
+        fields = '__all__'
